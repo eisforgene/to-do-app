@@ -21,6 +21,8 @@
   "homepage": "https://github.com/eisforgene/to-do-app#readme",
   "dependencies": {
     "apollo-server": "^3.5.0",
-    "graphql": "^16.1.0"
+    "dotenv": "^10.0.0",
+    "graphql": "^16.1.0",
+    "mongodb": "^4.2.1"
   }
 }
