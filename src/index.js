@@ -6,6 +6,10 @@ dotenv.config();
 const { DB_URI, DB_NAME } = process.env; // taking .env information and putting it into process.env
 
 const typeDefs = gql`
+  type Query {
+    myTaskLists: [TaskList!]
+  }
+  
   type User {
     id: ID!
     name: String!
@@ -28,11 +32,15 @@ const typeDefs = gql`
     content: String!
     isCompleted: Boolean!
 
-    taskList: TaskList
+    taskList: TaskList!
   }
 `;
 
-const resolvers = {};
+const resolvers = {
+  Query: {
+    myTaskLists: () => []
+  }
+};
 
 // console.log(DB_URI); // check to see if it is reading it correctly
 const start = async () => {
