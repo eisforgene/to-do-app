@@ -1,6 +1,7 @@
 const { ApolloServer, gql } = require("apollo-server");
 const { MongoClient } = require("mongodb");
 const dotenv = require("dotenv");
+const bcrypt = require('bcryptjs');
 dotenv.config();
 
 const { DB_URI, DB_NAME } = process.env; // taking .env information and putting it into process.env
@@ -10,6 +11,28 @@ const typeDefs = gql`
     myTaskLists: [TaskList!]
   }
   
+  type Mutation {
+    signUp(input: SignUpInput): AuthUser! 
+    signIn(input: SignInInput): AuthUser!
+  }
+
+  input SignUpInput { 
+    email: String!
+    password: String!
+    name: String!
+    avatar: String
+  }
+
+  input SignInInput { 
+    email: String!
+    password: String!
+  }
+
+  type AuthUser {
+    user: User!
+    token: String!
+  }
+
   type User {
     id: ID!
     name: String!
@@ -39,6 +62,13 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     myTaskLists: () => []
+  },
+  Mutation: {
+    signUp: (_, { input }) => {
+    },
+    // SignIn: () => {
+
+    // }
   }
 };
 
